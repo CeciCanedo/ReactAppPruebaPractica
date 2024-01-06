@@ -3,7 +3,7 @@ import {Link, useLocation} from "react-router-dom";
 
 const ResultadoBusqueda = () => {
     const location = useLocation();
-    const[pokemon, setPokemon] = useState([]);
+    const[movie, setMovie] = useState([]);
     const[search, setSearch] = useState("");
     const [showTable, setShowTable]= useState(false);
 
@@ -18,13 +18,13 @@ const ResultadoBusqueda = () => {
             const data = await response.json()
             
             //Obtenemos todos los datos del pokemon
-            const pokeDetails= await Promise.all(data.results.map(async (pokeData) => {
-                const pokeResponse= await fetch(pokeData.url);
-                const pokeDetails= await pokeResponse.json();
-                return pokeDetails;
+            const detalles= await Promise.all(data.results.map(async (data) => {
+                const response= await fetch(data.url);
+                const detalles= await response.json();
+                return detalles;
             }))
             //Seteamos los datos
-            setPokemon(pokeDetails)
+            setMovie(detalles)
         }
     
         //Creamos la funcion de busqueda    
@@ -53,9 +53,9 @@ const ResultadoBusqueda = () => {
     
         //Establecemos una condicion que se muestre toda la tabla si el usuario no elige un criterio
         if(!search){
-           results= pokemon
+           results= movie
         } else {
-            results=pokemon.filter((data) =>
+            results=movie.filter((data) =>
             data.name.toLowerCase().includes(search.toLocaleLowerCase())
             )
         }
@@ -75,13 +75,13 @@ const ResultadoBusqueda = () => {
                     </tr>
                 </thead>         
                 <tbody>
-                   {results && results.map((pokeDetails) => (
-                   <tr key={pokeDetails.name}>                     
-                    <td className="datosTabla">{pokeDetails.id}</td>
-                    <Link to={{pathname: `/Detalles/${pokeDetails.name}`, state: { pokemonDetails: pokeDetails } }} className="datosTabla" id="nombrePokemon">
-                        {pokeDetails.name}
+                   {results && results.map((detalles) => (
+                   <tr key={detalles.name}>                     
+                    <td className="datosTabla">{detalles.id}</td>
+                    <Link to={{pathname: `/Detalles/${detalles.name}`, state: { pokemonDetails: detalles } }} className="datosTabla" id="nombrePokemon">
+                        {detalles.name}
                     </Link>
-                    <td className="datosTabla"> <img src={pokeDetails.sprites.front_default} alt = {pokeDetails.name} /> </td>
+                    <td className="datosTabla"> <img src={detalles.sprites.front_default} alt = {detalles.name} /> </td>
                    </tr>
                    ))}
                 </tbody>   
