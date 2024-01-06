@@ -11,7 +11,7 @@ function App() {
     <Router>
       <div className="pagina container-fluid">
         <div className='centrar'>
-        <h1 className='titulo text-center large'>PokeBusqueda</h1>
+        <h1 className='titulo text-center large'>Peliculas</h1>
         <Routes>
           <Route path="/" element={<PrincipalPage />} />
           <Route path="/resultadoBusqueda" element={<ResultadoBusqueda />} />

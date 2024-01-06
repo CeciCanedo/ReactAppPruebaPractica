@@ -14,7 +14,7 @@ const PrincipalPage= () => {
     return (
         <div className="container">
 
-            <input value={search} onChange={searcher} type="text" placeholder="Buscar Pokemon" className="barra form-control"/>
+            <input value={search} onChange={searcher} type="text" placeholder="Buscar Pelicula" className="barra form-control"/>
 
             <div className="boton">
             <Link to={`/resultadoBusqueda?search=${search}`} className="btn btn-primary" role="button">Buscar</Link>
