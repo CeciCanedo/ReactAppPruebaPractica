@@ -1,39 +1,30 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useLocation } from "react-router-dom";
 
 const Detalles = () => {
-  const { pokemonName } = useParams();
-  const [detalles, setDetalles] = useState(null);
+  const location = useLocation();
+  console.log(location.state);
 
-  useEffect(() => {
-    const fetchDetalles = async () => {
-      try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
-        const data = await response.json();
-        setDetalles(data);
-      } catch (error) {
-        // Manejo de errores
-        console.error("Error fetching details: ", error);
-      }
-    };
+  const movie = location.state && location.state.movieDetails;
 
-    fetchDetalles();
-  }, [pokemonName]);
+  if (!movie) {
+    return <div>No se encontraron detalles de la película.</div>;
+  }
 
   return (
-    <div className="pokemon-details">
-      <h2>{pokemonName}</h2>
-      {detalles ? (
-        <div>
-            <img src={detalles.sprites.front_default} alt = {detalles.name} />
-            <p>ID: {detalles.id}</p>
-            <p>Altura: {detalles.height}</p>
+    <div className="container">
+      <h4>Detalles de la Película: {movie.title}</h4>
+      <div className="card">
+        <img src={movie.poster_url} alt={movie.title} className="card-img-top" />
+        <div className="card-body">
+          <h5 className="card-title">{movie.title}</h5>
+          <p className="card-text">Resumen: {movie.overview}</p>
+          <p className="card-text">Año de lanzamiento: {movie.release_year}</p>
+          <p className="card-text">ID: {movie.id}</p>
+          <p className="card-text">Votos: {movie.vote_average}</p>
         </div>
-      ) : (
-        <p>Cargando detalles...</p>
-      )}
+      </div>
     </div>
-    
   );
 };
 

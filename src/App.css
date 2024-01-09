@@ -1,13 +1,18 @@
-.centrar{
+/* .centrar{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .table{
   border-color: #d750ba;
 }
+
+.barraBuscadoraContainer{
+  border: 3px black solid;
+}
+
 
 .titulo{
   color: #d750ba;
@@ -67,4 +72,8 @@
 *{
   margin: 0;
   padding: 0;
+}
+
+.card-img-top{
+  width: 300px;
 }

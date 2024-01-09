@@ -11,11 +11,11 @@ function App() {
     <Router>
       <div className="pagina container-fluid">
         <div className='centrar'>
-        <h1 className='titulo text-center large'>Peliculas</h1>
+        <h1 className='titulo text-center large'></h1>
         <Routes>
           <Route path="/" element={<PrincipalPage />} />
           <Route path="/resultadoBusqueda" element={<ResultadoBusqueda />} />
-          <Route path="/Detalles/:pokemonName" element={<Detalles />}/>
+          <Route path="/detalles/:id" element={<Detalles />}/>
           
         </Routes>
         </div>
