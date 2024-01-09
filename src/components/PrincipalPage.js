@@ -14,7 +14,7 @@ const PrincipalPage= () => {
     
     //Renderizamos la pagina
     return (
-        <div className="container">
+        <div className="busqueda container-fluid vw-80">
             
             <input value={search} onChange={searcher} type="text" placeholder="Buscar Pelicula" className="barra form-control"/>
 

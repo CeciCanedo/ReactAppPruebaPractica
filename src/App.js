@@ -9,16 +9,16 @@ function App() {
   return (
     
     <Router>
-      <div className="pagina container-fluid">
-        <div className='centrar'>
-        <h1 className='titulo text-center large'></h1>
+      <div className="pagina container-fluid" style={{ backgroundColor: '#0F1022' }}>
+     
+        <h1 className='titulo text-center large'>Movie Search</h1>
         <Routes>
           <Route path="/" element={<PrincipalPage />} />
           <Route path="/resultadoBusqueda" element={<ResultadoBusqueda />} />
           <Route path="/detalles/:id" element={<Detalles />}/>
           
         </Routes>
-        </div>
+
       </div>
     </Router>
     
