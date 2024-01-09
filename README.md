@@ -68,3 +68,79 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+## SOLICITUD API CON PHP
+<?php
+
+require_once('vendor/autoload.php');
+
+use GuzzleHttp\Client;
+header("Access-Control-Allow-Origin: http://localhost:3001");
+
+$searchTerm = $_GET['search'];
+$client = new Client();
+
+
+$moviesData=[];
+
+$response = $client->request('GET', 'https://api.themoviedb.org/3/search/movie', [
+  'query'=>[
+    'query'=>$searchTerm,
+    'include_adult'=> false,
+    'language'=> 'en-US',
+    'page'=>1,
+  ],
+    'headers' => [
+        'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZGU2NmUxZWU4YWE5NjI3OTc1MTdiMWVjNzhhOTAwNSIsInN1YiI6IjY1OTliNjE0MWRiYzg4MDI1NTg2YmYwMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Xh2GNq8gEHf7_htpcowi-mpj5tpRHj8ZniYNvFFNTs8', 
+        'Accept' => 'application/json',
+
+    ],
+]);
+
+// Obtener el cuerpo de la respuesta y convertirlo a un arreglo asociativo
+$data = json_decode($response->getBody(), true);
+
+// Verificar si hay resultados
+if (isset($data['results']) && !empty($data['results'])) {
+    $movies = $data['results'];
+
+    $moviesData=[];
+    // Recorrer cada película
+    foreach ($movies as $movie) {
+        // Obtenemos los datos específicos
+        $title = $movie['title'];
+        $id = $movie['id'];
+        $release_year = $movie['release_date'];
+        $vote_average = $movie['vote_average'];
+        $genre_ids = $movie['genre_ids'];
+        $overview = $movie['overview'];
+        $poster_path = $movie['poster_path'];
+        $original_language= $movie['original_language'];
+
+         // Comprueba si hay una URL de póster válida
+         if ($poster_path) {
+          // Construye la URL completa de la imagen del póster
+          $full_poster_url = 'https://image.tmdb.org/t/p/w500' . $poster_path;
+
+          $moviesData[]=[
+            'id'=> $id,
+            'title'=> $title,
+            'release_year'=> $release_year,
+            'vote_average'=> $vote_average,
+            'overview'=> $overview,
+            'poster_url'=> $full_poster_url,
+            'genre_ids'=> $genre_ids,
+            'original_language' => $original_language,
+            
+          ];
+        }
+      }
+    }  
+
+header('Content-Type: application/json');
+echo json_encode($moviesData);
+exit(); // Detiene cualquier otra salida que no sea el JSON
+
+?>
