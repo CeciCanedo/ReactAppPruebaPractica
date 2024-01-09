@@ -1,0 +1,10 @@
+Crea una aplicación web utilizando PHP y React que permita a los usuarios buscar información de películas por título y ver detalles de cada película seleccionada. 
+Para lograr esto, la aplicación debe consumir la API pública de IMDb (https://imdb-api.com/).
+
+
+La aplicación debe incluir las siguientes funcionalidades:
+    1. Una página de inicio que muestre un campo de búsqueda y un botón de búsqueda.
+    2. Una página de resultados de búsqueda que muestre una lista de películas que coinciden con el término de búsqueda. Cada película debe mostrar su título, su año de lanzamiento y su calificación de IMDb.
+    3. Una página de detalles de película que muestre información más detallada de la película seleccionada. Esta información debe incluir el título, el año de lanzamiento, la duración, el género, la calificación de IMDb, la descripción, la lista de actores principales y un póster de la película.
+    4. La aplicación debe ser responsive y adaptarse a diferentes tamaños de pantalla.
+    5. La aplicación debe utilizar React para crear la interfaz de usuario y PHP para hacer las solicitudes a la API de IMDb y manejar la lógica del servidor.
